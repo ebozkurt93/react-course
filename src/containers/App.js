@@ -4,14 +4,47 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: '1', name: 'Erdem', age: 25 },
-      { id: '2', name: 'Engin', age: 24 },
-      { id: '3', name: 'Erdem', age: 25 }
-    ],
-    showPersons: true
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside constructor', props);
+    this.state = {
+      persons: [
+        { id: '1', name: 'Erdem', age: 25 },
+        { id: '2', name: 'Engin', age: 24 },
+        { id: '3', name: 'Erdem', age: 25 }
+      ],
+      showPersons: false
+    }
   }
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
+    return true;
+}
+componentWillReceiveProps(nextProps) {
+    console.log('[UPDATE App.js] Inside componentWillReceiveProps', nextProps);
+}
+componentWillUpdate(nextProps, nextState) {
+    
+    console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
+}
+componentDidUpdate() {
+    
+    console.log('[UPDATE App.js] Inside componentDidUpdate');
+}
+  // state = {
+  //   persons: [
+  //     { id: '1', name: 'Erdem', age: 25 },
+  //     { id: '2', name: 'Engin', age: 24 },
+  //     { id: '3', name: 'Erdem', age: 25 }
+  //   ],
+  //   showPersons: true
+  // }
 
   switchNameHandler = (newName) => {
     //console.log('Was Clicked!!')
@@ -53,6 +86,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render');
 
     let persons = null;
 
