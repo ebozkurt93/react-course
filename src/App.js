@@ -37,7 +37,7 @@ class App extends Component {
     persons[personIndex] = person;
 
 
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   }
 
   deletePersonHandler = (personIndex) => {
@@ -62,9 +62,9 @@ class App extends Component {
           {this.state.persons.map((person, index) => {
             return <Person
               click={() => this.deletePersonHandler(index)}
+              key={person.id}
               name={person.name}
               age={person.age}
-              key={person.id}
               changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
@@ -76,10 +76,10 @@ class App extends Component {
 
     let assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      assignedClasses.push( classes.red ); // classes = ['red']
+      assignedClasses.push(classes.red); // classes = ['red']
     }
     if (this.state.persons.length <= 1) {
-      assignedClasses.push( classes.bold ); // classes = ['red', 'bold']
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
     return (
@@ -87,7 +87,7 @@ class App extends Component {
         <h1>React demo</h1>
         <p className={assignedClasses.join(' ')}>Does this work?</p>
         <button
-        className= {btnClass}
+          className={btnClass}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {persons}
       </div>
