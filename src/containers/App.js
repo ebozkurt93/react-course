@@ -14,7 +14,8 @@ class App extends PureComponent {
         { id: '2', name: 'Engin', age: 24 },
         { id: '3', name: 'Erdem', age: 25 }
       ],
-      showPersons: false
+      showPersons: false,
+      toggleClicked: 0
     }
   }
   componentWillMount() {
@@ -23,22 +24,22 @@ class App extends PureComponent {
   componentDidMount() {
     console.log('[App.js] Inside componentDidMount()');
   }
-//   shouldComponentUpdate(nextProps, nextState) {
-//     console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
-//     return nextState.persons !== this.state.persons ||
-//     nextState.showPersons !== this.state.showPersons;
-// }
-componentWillReceiveProps(nextProps) {
+  //   shouldComponentUpdate(nextProps, nextState) {
+  //     console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
+  //     return nextState.persons !== this.state.persons ||
+  //     nextState.showPersons !== this.state.showPersons;
+  // }
+  componentWillReceiveProps(nextProps) {
     console.log('[UPDATE App.js] Inside componentWillReceiveProps', nextProps);
-}
-componentWillUpdate(nextProps, nextState) {
-    
+  }
+  componentWillUpdate(nextProps, nextState) {
+
     console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
-}
-componentDidUpdate() {
-    
+  }
+  componentDidUpdate() {
+
     console.log('[UPDATE App.js] Inside componentDidUpdate');
-}
+  }
   // state = {
   //   persons: [
   //     { id: '1', name: 'Erdem', age: 25 },
@@ -84,8 +85,15 @@ componentDidUpdate() {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow });
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      }
+    });
+
   }
+
 
   render() {
     console.log('[App.js] Inside render');
@@ -113,7 +121,7 @@ componentDidUpdate() {
 
     return (
       <WithClass classes={classes.App} >
-        <button onClick={() => {this.setState({showPersons: true})}} >Show Persons</button>
+        <button onClick={() => { this.setState({ showPersons: true }) }} >Show Persons</button>
         <Cockpit
           showPersons={this.state.showPersons}
           persons={this.state.persons}
